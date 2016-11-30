@@ -1,0 +1,81 @@
+@CHARSET "UTF-8";
+/*  公用样式    */
+html,body,div,ul,ol,li,dl,dt,dd,p,h1,h2,h3,h4,h4,h5,h6{ padding:0px; margin:0px;}
+form,select,input,img{ border:0; margin:0px; padding:0px;}
+input,img{ vertical-align:middle;}
+li{ list-style:none;}
+a{ text-decoration:none;}
+body {
+	height: 100;
+	width: 100%;
+	font-size:12px;
+	font-family:"宋体",Arial;
+	color:#000;
+}
+.fl{float: left;}
+.fr{float: right;}
+.fclear{font-size:0px; clear:both;}/* 清除浮动--浏览器兼容使用 */
+.fclear-height{clear: both;height: 25px;width: 100%;}
+.clear{clear: both;}
+
+/*登陆页面样式*/
+.u_body{background-color: #44734A}
+.user-login{
+	margin: 0 auto;
+	padding-top: 6%;
+	width: 40%;
+	height: auto;
+}
+.user-head{
+	font-size:26px;
+	font-weight: bold;
+}
+.user-login-bg{
+	margin: 0 auto;
+	width: 430px;
+	height: 221px;
+	background: url(../img/login1.png) no-repeat;
+}
+.login-table{
+	width:100%;
+	height:70%;
+	padding-top: 10%;
+	padding-left: 10%;
+	color:#CECECE;
+}
+#rcmloginuser{
+	width:200px;
+	height:20px;
+}
+#rcmloginpwd{
+	width:200px;
+	height:20px;
+}
+.login-p{
+	width:100%;
+	height:auto;
+	text-align:center;
+}
+.mainaction{
+	border-width: 1px;
+    border-style: solid;
+    border-color: #c9c9c9;
+    border-radius: 6px;   /*边框倒圆角*/
+    padding: 4px 14px;
+    display: inline-block;  /*行内 块 布局*/
+	
+}
+/*user-header页面样式*/
+.user-header{
+	width:100%;
+	height:50px;
+	background: url(../img/login-header.jpg) repeat-x;
+}
+.user{
+	width:15%;
+	height:auto;
+}
+.user-list{
+	width:15%;
+	height:50px;
+}

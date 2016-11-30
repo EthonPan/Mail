@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.toptest.oa.mapper.UserMapper">
+
+<!-- <sql id="userColumn">
+u.id,
+u.department_id AS "department.id",
+u.roles_id AS "role.id",
+u.loginName,
+u.password,
+u.user_name,
+u.sex,
+u.user_phone,
+u.user_email,
+u.user_description,
+</sql> -->
+<!--查询结果不包含User列表-->
+<resultMap type="User" id="userMap">
+	<id  column="u_id" property="u_id" />
+	<result column="loginName" property="loginName" />
+	<result column="name" property="name" />
+	<result column="intime" property="intime" />
+	<result column="sex" property="sex" />
+	<result column="phone" property="phone" />
+	<result column="email" property="email" />
+	<result column="description" property="description" />
+	<result column="leavel" property="leavel" />
+	<collection property="roles" resultMap="roleMap" />
+</resultMap>
+<!--查询的时候将Department列表一起查询出来-->
+<resultMap id="userDepMap" type="User"
+           extends="userMap">
+    <collection property="department" ofType="Department">
+        <id property="id" column="id"/>
+        <result property="name" column="dname"/>
+        <result property="description" column="ddescription"/>
+        <result property="leavel" column="dleavel"/>
+    </collection>
+</resultMap>
+<!--映射Role列表到user-->
+<resultMap type="Role" id="roleMap">
+		<id  column="r_id" property="r_id" />
+		<result column="rname" property="name" />
+		<result column="rdescription" property="description" />
+		<result column="rleavel" property="leavel"/>
+</resultMap>
+
+<insert id="save" parameterType="User">
+	insert into user(
+		department_id,
+		roles_id,
+		loginName,
+		password,
+		user_name,
+		sex,
+		user_phone,
+		user_email,
+		user_description
+	) values 
+	(
+		#{department.id},
+		#{roles.r_id},
+		#{loginName},
+		#{password},
+		#{name},
+		#{sex},
+		#{phone},
+		#{email},
+		#{description}
+	)
+</insert>
+
+<!-- 查询User表数据量 -->
+<select  id="selectCount" resultType="int">
+    select count(*) from user
+</select>
+<!-- 按一定量查询数据 -->
+<select  id="showPage" resultMap="userDepMap" parameterType="map">
+    select u.*,d.name dname,r.name rname from user u left join department d on u.department_id=d.id left join role r on u.roles_id=r.r_id order by u.u_id DESC limit #{beginStart},#{everyPage}
+</select>
+
+<select  id="selectByName" resultType="User" parameterType="String">
+	select * from user where loginName=#{name}
+</select>
+
+<!-- <delete id="delete" parameterType="Integer">
+	delete from user where id=#{id}
+</delete>
+<update id="update" parameterType="User">
+	update User set department = #{department},roles = #{roles},loginName = #{loginName},password = #{password},name = #{user_name},sex = #{sex},phone = #{user_phone},email = #{user_email},description = #{user_description} where id = #{id}
+</update>
+<select  id="getById" resultType="User" parameterType="Integer">
+	select * from user where id=#{id}
+</select>
+<select  id="getByIds" resultType="User" parameterType="int[]">
+	    select * from user where id in  
+    <foreach collection="ids" index="index" item="item" open="(" separator="," close=")">  
+        #{item}
+    </foreach> 
+</select>
+<select  id="findAll" resultType="User">
+	select * from user
+</select>
+
+<select  id="selectAllUser" resultType="User" parameterType="map">
+        select * from user order by id DESC limit #{beginStart},#{everyPage}
+</select>
+<select  id="selectCount" resultType="int">
+        select count(*) from user order by uid DESC 
+</select>
+ -->
+
+ </mapper>

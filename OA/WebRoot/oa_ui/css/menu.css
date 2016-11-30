@@ -1,0 +1,115 @@
+@CHARSET "UTF-8";
+/*
+ *
+ * Template Name: Fullscreen Login
+ * Description: Login Template with Fullscreen Background Slideshow
+ * Author: Anli Zaimi
+ * Author URI: http://azmind.com
+ *
+ */
+
+ /*公共样式  */
+html,body,div,ul,ol,li,dl,dt,dd,p,h1,h2,h3,h4,h4,h5,h6{ padding:0px; margin:0px;}
+select,img{ border:0; margin:0px; padding:0px;}
+img{ vertical-align:middle;}
+li{ list-style:none;}
+a{ text-decoration:none;}
+body {
+	height: 100%;
+	width: 100%;
+	font-size:12px;
+	font-family:"宋体",Arial;
+	color:#000;
+}
+.fl{float: left;}
+.fr{float: right;}
+.fclear{font-size:0px; clear:both;}
+.fclear-height{clear: both;height: 25px;width: 100%;}
+.clear{clear: both;}
+/**头部样式ʽ**/
+#top{
+	width: 100%;
+	height: 46px;
+	line-height:46px;
+	background-color: #222222;
+}
+.top-font{
+	font-size:18px;
+	font-family:"宋体",Arial;
+	font-weight:bold;
+	font-style: italic;
+	color: #FFFFFF;
+}
+.top-logout{
+	border-width: 1px;
+    border-style: solid;
+    border-color: #cecece;
+    border-radius: 6px;   /*边框倒圆角*/
+    padding: 8px 12px;
+    background: #DA4E49;
+    font-size:12px;
+	font-family:"宋体",Arial;
+	font-weight:bold;
+	color: #FFFFFF;
+}
+.mright{    
+	margin-right:10px;
+}
+a:hover{color: #36B8E7}
+
+/******/
+.login-bg{
+	background-image: url(../img/1.jpg);
+	background-repeat: no-repeat;
+}
+.page-container {
+	width:350px;
+	height:auto;
+    margin: 120px auto 0 auto;
+}
+
+#bg{
+	background-color: #333333;
+}
+
+.bg{
+	background-color: #3992D0;
+}
+
+
+/*left*/
+.leftsidebar_box{width:20%;height:auto !important;overflow:visible !important;position:fixed;height:100% !important;background-color:#333333;}
+.line{height:2px;width:100%;background-color: #222222;}
+.leftsidebar_box dt{padding-left:40px;padding-right:10px;background-repeat:no-repeat;background-position:10px center;color:#f5f5f5;font-size:14px;position:relative;line-height:48px;cursor:pointer;}
+.leftsidebar_box dd{background-color:#222222;padding-left:40px;}
+.leftsidebar_box dd a{color:#f5f5f5;line-height:20px;}
+.leftsidebar_box dt img{position:absolute;right:10px;top:20px;}
+.system_log dt{background-image:url(../img/left/system.png)}
+.custom dt{background-image:url(../img/left/custom.png)}
+.channel dt{background-image:url(../img/left/channel.png)}
+.app dt{background-image:url(../img/left/app.png)}
+.cloud dt{background-image:url(../img/left/cloud.png)}
+.syetem_management dt{background-image:url(../img/left/syetem_management.png)}
+.source dt{background-image:url(../img/left/source.png)}
+.statistics dt{background-image:url(../img/left/statistics.png)}
+.leftsidebar_box dl dd:last-child{padding-bottom:10px;}
+
+.fdiv{
+	background-color: #ffffff;
+	width:80%;
+	height: 100% !important;
+	margin-left:160px;
+	border:0;
+}
+
+.fname{
+	margin:0;
+	width:100%;
+	height:586px;
+	border:none;
+}
+/*添加的CSS*/
+form,input,button{font-family:Microsoft YaHei,Segoe UI,Tahoma,Arial,Verdana,sans-serif; text-decoration:none; width:100%;}
+button.submit_button{ font-size:24px; letter-spacing:15px;}
+input.Captcha{ width:130px; float:left;}
+

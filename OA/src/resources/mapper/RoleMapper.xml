@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.toptest.oa.mapper.RoleMapper">
+<!--查询结果不包含User列表-->
+<resultMap type="Role" id="roleMap">
+	<id  column="r_id" property="r_id" />
+	<result column="name" property="name" />
+	<result column="description" property="description" />
+	<result column="leavel" property="leavel"/>
+</resultMap>
+<!--查询的时候将User列表一起查询出来-->
+<resultMap id="RoleUserMap" type="Role"
+           extends="roleMap">
+    <collection property="teachers" ofType="User">
+        <id property="u_id" column="u_id"/>
+
+        <result property="name" column="u_name"/>
+        <result property="number" column="u_number"/>
+        <result property="gender" column="u_gender"/>
+        <result property="age" column="t_age"/>
+    </collection>
+</resultMap>
+
+
+<select  id="findAll" resultMap="roleMap">
+	select * from role order by r_id desc
+</select>
+<select  id="selectCount" resultType="int">
+        select count(*) from role order by r_id DESC 
+</select>
+<select  id="showPage" resultType="Role" parameterType="map">
+        select * from role order by r_id DESC limit #{beginStart},#{everyPage}
+</select>
+<insert id="save" parameterType="Role">
+		insert into role(
+		name,
+		description,
+		leavel
+	) values 
+	(
+		#{name},
+		#{description},
+		#{leavel}
+	)
+</insert>
+<select  id="getById" resultType="Role" parameterType="Integer">
+	select * from role where r_id=#{id}
+</select>
+<select  id="getByName" resultType="Role" parameterType="String">
+	select name,description,leavel from role where name=#{name}
+</select>
+<delete id="delete" parameterType="Integer">
+	delete from role where r_id=#{id}
+</delete>
+<delete id="delAll" parameterType="String">
+		<![CDATA[
+            delete from role where r_id in
+        ]]>
+        <foreach collection="array" item="ids"  open="(" separator="," close=")">  
+            #{ids} 
+         </foreach>
+</delete>
+<update id="update" parameterType="Role">
+	update role set name=#{name},leavel=#{leavel},description=#{description} where r_id=#{r_id}
+</update>
+</mapper>

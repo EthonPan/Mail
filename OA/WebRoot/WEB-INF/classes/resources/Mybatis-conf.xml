@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!-- 配置类的别名 -->
+<typeAliases>
+    <typeAlias alias="User" type="cn.toptest.oa.model.User" />
+    <typeAlias alias="Role" type="cn.toptest.oa.model.Role" />
+    <typeAlias alias="Department" type="cn.toptest.oa.model.Department" />
+</typeAliases>
+
+<!--配置映射器 -->
+   <mappers>
+   		<mapper resource="resources/mapper/UserMapper.xml"/>
+   		<mapper resource="resources/mapper/RoleMapper.xml"/>
+   		<mapper resource="resources/mapper/DepartmentMapper.xml"/>
+   </mappers>
+
+</configuration>
+

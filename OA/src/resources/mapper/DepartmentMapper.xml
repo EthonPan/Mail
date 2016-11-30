@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.toptest.oa.mapper.DepartmentMapper">
+<!--查询结果不包含User列表-->
+<resultMap type="Department" id="departmentMap">
+	<id  column="id" property="id" />
+	<result column="name" property="name" />
+	<result column="description" property="description" />
+	<result column="leavel" property="leavel" />
+</resultMap>
+<!--查询的时候将Department列表一起查询出来-->
+<resultMap id="parentMap" type="Department"
+           extends="departmentMap">
+    <collection property="parent" ofType="Department">
+        <id property="id" column="uppid"/>
+        <result property="name" column="pname"/>
+    </collection>
+</resultMap>
+
+<!-- 使用resultMap的集合一定要确认属性id 有在使用 -->
+<!-- 查询插入页面的上级部门 -->
+<select  id="findAll" resultMap="parentMap">
+select id,name,leavel,uppid from department order by id
+</select>
+<!-- 查询department表数据量 -->
+<select  id="selectCount" resultType="int">
+    select count(*) from department
+</select>
+<!-- 按一定量查询数据 -->
+<select  id="showPage" resultMap="parentMap" parameterType="map">
+    select d.*,p.name as pname from department d left join department p on d.uppid=p.id order by id DESC limit #{beginStart},#{everyPage}
+</select>
+<insert id="save" parameterType="Department">
+		insert into department(
+		name,
+		description,
+		leavel,
+		uppid
+	) values 
+	(
+		#{name},
+		#{description},
+		#{leavel},
+		#{parent.id}
+	)
+</insert>
+<select  id="getById" resultMap="parentMap" parameterType="Integer">
+	select * from department where id=#{id}
+</select>
+<select  id="getByName" resultType="Department" parameterType="String">
+	select name,description,leavel from department where name=#{name}
+</select>
+<delete id="delete" parameterType="Integer">
+	delete from department where id=#{id}
+</delete>
+<delete id="delAll" parameterType="String">
+		<![CDATA[
+            delete from department where id in
+        ]]>
+        <foreach collection="array" item="ids"  open="(" separator="," close=")">  
+            #{ids} 
+         </foreach>
+</delete>
+<update id="update" parameterType="Department">
+	update department set name=#{name},leavel=#{leavel},description=#{description},uppid=#{parent.id} where id=#{id}
+</update>
+<!-- <resultMap id="DepartmentResult" type="Department">
+    <id property="id" column="id" />
+    <result property="name" column="department_name" />
+    <result property="description" column="department_description" />
+    <result property="users" column="department_users" />  
+</resultMap>
+
+<insert id="save" parameterType="Department">
+	insert into department(department_name,"department_description",department_users) values(#{name},#{description},#{users})
+</insert>
+<delete id="delete" parameterType="Integer">
+	delete from department where id=#{id}
+</delete>
+<update id="update" parameterType="Department">
+	update department set department_name = #{name},department_description = #{description},department_users = #{users} where id = #{id}
+</update>
+<select  id="getById" resultType="Department" parameterType="Integer">
+	select * from department where id=#{id}
+</select>
+<select  id="getByIds" resultType="Department">
+	    select * from department where id in  
+    <foreach collection="ids" index="index" item="item" open="(" separator="," close=")">  
+        #{item}
+    </foreach> 
+</select>
+<select  id="findAll" resultType="Department">
+	select * from department
+</select>
+
+
+<select  id="selectAllUser" resultType="User" parameterType="map">
+        select * from user order by uid DESC limit #{beginStart},#{everyPage}
+</select>
+<select  id="selectCount" resultType="int">
+        select count(*) from user order by uid DESC 
+</select> -->
+
+</mapper>
